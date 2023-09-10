@@ -1,25 +1,27 @@
 package com.likelion.springstudy.domain.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Getter;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "letter_box")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter
-@Table(name = "member")
-public class MemberEntity {
+public class BoxEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue
     private Long id;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    private int letterLimit;
 
-    private String nickname;
-    private int age;
-    private Boolean  isAdult;
+    @Builder
+    public BoxEntity(String name, int letterLimit) {
+        this.name = name;
+        this.letterLimit = letterLimit;
+    }
 }
