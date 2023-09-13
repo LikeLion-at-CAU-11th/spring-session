@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.util.Assert;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,8 +19,8 @@ public class MemberEntity {
     private String name;
 
     @Column(nullable = false)
-
     private String nickname;
     private int age;
     private Boolean  isAdult;
+
 }

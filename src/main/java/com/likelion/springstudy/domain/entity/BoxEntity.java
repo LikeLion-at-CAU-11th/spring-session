@@ -19,6 +19,8 @@ public class BoxEntity {
 
     private int letterLimit;
 
+    private String code;
+
     @Builder
     public BoxEntity(String name, int letterLimit) {
         this.name = name;
