@@ -15,4 +15,8 @@ public class LetterEntity {
 
     @Column(nullable = false)
     private String content;
+
+    @ManyToOne
+    @JoinColumn(name = "box_id")
+    private BoxEntity box;
 }

@@ -17,9 +17,13 @@ public class BoxEntity {
     @Column(nullable = false)
     private String name;
 
-    private int letterLimit;
+    private int letterLimit = 20;
 
     private String code;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private MemberEntity member;
 
     @Builder
     public BoxEntity(String name, int letterLimit) {
