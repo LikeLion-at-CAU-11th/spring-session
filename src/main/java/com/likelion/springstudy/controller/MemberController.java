@@ -1,20 +1,23 @@
 package com.likelion.springstudy.controller;
 
 
+import com.likelion.springstudy.dto.request.member.MemberSignInRequest;
 import com.likelion.springstudy.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;
-    @GetMapping
-    public String getMember() {
-        return "member";
+
+    @PostMapping
+    public ResponseEntity<Void> signIn(@RequestBody final MemberSignInRequest request) {
+        memberService.
+        return ResponseEntity.created().build();
     }
+
 }
