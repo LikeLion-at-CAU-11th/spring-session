@@ -16,8 +16,7 @@ public class MemberController {
 
     @PostMapping
     public ResponseEntity<Void> signIn(@RequestBody final MemberSignInRequest request) {
-        memberService.
-        return ResponseEntity.created().build();
+        return ResponseEntity.ok().build();
     }
 
 }
