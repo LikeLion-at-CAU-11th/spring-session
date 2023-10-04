@@ -1,7 +1,10 @@
 package com.likelion.springstudy.service;
 
 
-import com.likelion.springstudy.repository.MemberRepository;
+import com.likelion.springstudy.domain.entity.MemberEntity;
+import com.likelion.springstudy.dto.response.member.MemberGetResponse;
+import com.likelion.springstudy.repository.MemberJpaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,9 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+    private final MemberJpaRepository memberJpaRepository;
 
-    @Transactional
-    public void create() {
+    public MemberGetResponse getById(Long id) {
+        return MemberGetResponse.of(memberJpaRepository.findByIdOrThrow(id));
     }
+
 }

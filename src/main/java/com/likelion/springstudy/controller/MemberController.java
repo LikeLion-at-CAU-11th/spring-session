@@ -1,7 +1,7 @@
 package com.likelion.springstudy.controller;
 
 
-import com.likelion.springstudy.dto.request.member.MemberSignInRequest;
+import com.likelion.springstudy.dto.response.member.MemberGetResponse;
 import com.likelion.springstudy.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +14,9 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping
-    public ResponseEntity<Void> signIn(@RequestBody final MemberSignInRequest request) {
-        return ResponseEntity.ok().build();
+    // 특정 사용자 정보를 조회하는 API
+    @GetMapping("/{memberId}")
+    public ResponseEntity<MemberGetResponse> getMember(@PathVariable("memberId") Long memberId) {
+        return ResponseEntity.ok(memberService.getById(memberId));
     }
-
 }

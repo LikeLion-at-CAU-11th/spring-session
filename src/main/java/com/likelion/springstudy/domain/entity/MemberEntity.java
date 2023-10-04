@@ -1,17 +1,19 @@
 package com.likelion.springstudy.domain.entity;
 
+import com.likelion.springstudy.domain.BaseTimeEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.util.Assert;
 
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED) // 기본생성자
 @Getter
 @Table(name = "member")
-public class MemberEntity {
+// JPA에서 기본적으로 table 이름을 명시 안해주면, class에 snake를 적용해서 저장.
+// member_entity
+public class MemberEntity extends BaseTimeEntity {
 
+    // 관계형 데이터베이스 -> 식별자를 갖는다.
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -20,7 +22,15 @@ public class MemberEntity {
 
     @Column(nullable = false)
     private String nickname;
-    private int age;
-    private Boolean  isAdult;
 
+    @Builder
+    public MemberEntity(String name, String nickname) {
+        this.name = name;
+        this.nickname = nickname;
+    }
+
+    // 회원 닉네임을 업데이트하는 기능
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
+    }
 }
