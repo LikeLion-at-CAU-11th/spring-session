@@ -1,10 +1,8 @@
 package com.likelion.springstudy.service;
 
 
-import com.likelion.springstudy.domain.entity.MemberEntity;
 import com.likelion.springstudy.dto.response.member.MemberGetResponse;
 import com.likelion.springstudy.repository.MemberJpaRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
