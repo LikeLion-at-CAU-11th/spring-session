@@ -41,17 +41,11 @@ public class BoxEntity extends BaseTimeEntity {
     @OneToMany(mappedBy = "box")
     private final List<LetterEntity> letters = new ArrayList<>();
 
-    @Builder
-    public BoxEntity(String name, int letterLimit) {
-        this.name = name;
-        this.letterLimit = letterLimit;
-    }
 
     @Builder
     public BoxEntity(String name, int letterLimit, String code, MemberEntity member) {
         validate(letterLimit);
         this.name = name;
-        this.letterLimit = letterLimit;
         this.code = code;
         this.member = member;
     }
