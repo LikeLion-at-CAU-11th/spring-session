@@ -18,6 +18,7 @@ public class MemberService {
     private final MemberJpaRepository memberJpaRepository;
     private final BoxJpaRepository boxJpaRepository;
 
+    @Transactional
     public Long create(MemberSignInRequest request) {
         //TODO: create auth logic
         MemberEntity member = memberJpaRepository.save(
