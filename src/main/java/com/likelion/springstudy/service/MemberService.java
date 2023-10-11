@@ -34,4 +34,16 @@ public class MemberService {
         return MemberGetResponse.of(memberJpaRepository.findByIdOrThrow(id));
     }
 
+    @Transactional
+    public void deleteById(Long id) {
+        MemberEntity member = memberJpaRepository.findByIdOrThrow(id);
+        member.softDelete();
+    }
+
+    @Transactional
+    public void recoverMemberInfo(Long id) {
+        MemberEntity member = memberJpaRepository.findByIdOrThrow(id);
+        member.recover();
+    }
+
 }

@@ -3,7 +3,6 @@ package com.likelion.springstudy.controller;
 
 import com.likelion.springstudy.dto.request.member.MemberSignInRequest;
 import com.likelion.springstudy.dto.response.member.MemberGetResponse;
-import com.likelion.springstudy.service.BoxService;
 import com.likelion.springstudy.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -28,5 +27,17 @@ public class MemberController {
     public ResponseEntity<Void> signIn(@RequestBody MemberSignInRequest request) {
         URI location = URI.create("/api/member/" + memberService.create(request));
         return ResponseEntity.created(location).build();
+    }
+
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity<Void> withdrawMembership(@PathVariable("memberId") Long memberId) {
+        memberService.deleteById(memberId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> recoverMembership(@PathVariable("memberId") Long memberId) {
+        memberService.recoverMemberInfo(memberId);
+        return ResponseEntity.ok().build();
     }
 }
