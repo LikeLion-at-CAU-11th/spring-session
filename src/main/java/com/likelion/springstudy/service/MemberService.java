@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberJpaRepository memberJpaRepository;
-    private final BoxJpaRepository boxJpaRepository;
 
     @Transactional
     public Long create(MemberSignInRequest request) {
