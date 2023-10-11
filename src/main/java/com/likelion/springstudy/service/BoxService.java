@@ -28,7 +28,8 @@ public class BoxService {
 
     public BoxGetResponse getByCode(String boxCode) {
         BoxEntity box = boxJpaRepository.findByCodeOrThrow(boxCode);
-        List<LetterGetResponse> letters = letterJpaRepository.findAllByBox(box).stream()
+        List<LetterGetResponse> letters = letterJpaRepository.findAllByBox(box)
+                .stream()
                 .map(LetterGetResponse::of)
                 .collect(Collectors.toList());
         return BoxGetResponse.of(box, letters);

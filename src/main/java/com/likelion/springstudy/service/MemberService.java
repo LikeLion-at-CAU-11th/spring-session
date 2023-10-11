@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -43,6 +45,10 @@ public class MemberService {
     public void recoverMemberInfo(Long id) {
         MemberEntity member = memberJpaRepository.findByIdOrThrow(id);
         member.recover();
+    }
+
+    @Transactional
+    public void deleteExpiredMember() {
     }
 
 }

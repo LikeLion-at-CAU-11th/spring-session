@@ -3,6 +3,8 @@ package com.likelion.springstudy.domain.entity;
 import com.likelion.springstudy.domain.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.util.Assert;
 
 import java.time.LocalDateTime;

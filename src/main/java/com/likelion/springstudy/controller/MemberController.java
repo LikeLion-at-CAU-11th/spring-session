@@ -20,7 +20,8 @@ public class MemberController {
     // 특정 사용자 정보를 조회하는 API
     @GetMapping("/{memberId}")
     public ResponseEntity<MemberGetResponse> getMember(@PathVariable("memberId") Long memberId) {
-        return ResponseEntity.ok(memberService.getById(memberId));
+        MemberGetResponse response = memberService.getById(memberId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping
@@ -35,7 +36,7 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping
+    @PostMapping("/{memberId}") // 잘 모르겠다... 근데 클라이언트 관점에서 기능을 생각했을 때는 POST Mapping
     public ResponseEntity<Void> recoverMembership(@PathVariable("memberId") Long memberId) {
         memberService.recoverMemberInfo(memberId);
         return ResponseEntity.ok().build();
