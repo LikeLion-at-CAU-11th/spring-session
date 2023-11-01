@@ -1,17 +1,20 @@
 spring:
-  config:
-    activate:
-      on-profile: local
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:tcp://localhost/~/test
-#    username: sa
-#    password:
+  #  config:
+  #    activate:
+  #      on-profile: local
+
+  #  datasource:
+  #    driver-class-name: org.h2.Driver
+  #    url: jdbc:h2:tcp://localhost/~/spring
+  #    username: sa
+  #    password:
+  profiles:
+    include: SECRET-KEY
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://test.csifg40nv43g.ap-northeast-2.rds.amazonaws.com:3306/test?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    url: jdbc:mysql://${database-host}:3306/demo
     username: admin
-    password: ${MY_SECRET_KEY}
+    password: ${database-password}
 
   jpa:
     show-sql: true
@@ -20,4 +23,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        show_sql: true
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+  #        show_sql: true
+
+  logging.level:
+    org.hibernate.SQL: debug
+
