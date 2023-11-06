@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ExpiredMemberDeleteSchedulingService {
+public class ExpiredMemberDeleteBatch {
 
     private final MemberJpaRepository memberJpaRepository;
 
