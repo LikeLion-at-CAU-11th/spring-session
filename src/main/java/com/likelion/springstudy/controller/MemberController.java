@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/member")
@@ -30,8 +31,9 @@ public class MemberController {
         return ResponseEntity.created(location).build();
     }
 
-    @DeleteMapping("/{memberId}")
-    public ResponseEntity<Void> withdrawMembership(@PathVariable("memberId") Long memberId) {
+    @DeleteMapping
+    public ResponseEntity<Void> withdrawMembership(Principal principal) {
+        var memberId = Long.valueOf(principal.getName());
         memberService.deleteById(memberId);
         return ResponseEntity.ok().build();
     }
