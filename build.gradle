@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.10'
 	id 'io.spring.dependency-management' version '1.1.3'
+	id "org.asciidoctor.jvm.convert" version "3.3.2"
+
 }
 
 group = 'com.likelion'
@@ -12,6 +14,7 @@ java {
 }
 
 configurations {
+	asciidoctorExt
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
@@ -22,6 +25,13 @@ repositories {
 }
 
 dependencies {
+
+	// REST DOCS
+	asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	// implementation 'org.springframework.boot:spring-boot-starter-security'
 
@@ -30,21 +40,57 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.jetbrains:annotations:24.0.0'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	// implementation 'org.springframework.boot:spring-boot-starter-security'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+
 	// runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	// runtimeOnly 'org.postgresql:postgresql'
+
+
+
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+	// testImplementation 'org.springframework.security:spring-security-test'
 
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.5'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.5'
 	implementation group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.5'
 }
 
+ext {
+	snippetsDir = file('build/generated-snippets')
+}
+
+
+asciidoctor {
+	inputs.dir snippetsDir
+	configurations 'asciidoctorExt'
+	dependsOn test
+
+	baseDirFollowsSourceFile()
+}
+
+asciidoctor.doFirst {
+	delete file('src/main/resources/static/docs')
+}
+
+task copyDocument(type: Copy) {
+	dependsOn asciidoctor
+	from file("build/docs/asciidoc")
+	into file("src/main/resources/static/docs")
+
+
+}
+
+build {
+	dependsOn copyDocument
+}
+
+
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
